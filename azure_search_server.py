@@ -6,7 +6,11 @@ from dotenv import load_dotenv
 from azure.core.credentials import AzureKeyCredential
 from azure.search.documents import SearchClient
 from azure.search.documents.models import VectorizableTextQuery
-from mcp.server.fastmcp import FastMCP
+try:
+    from mcp.server.fastmcp import FastMCP
+except ImportError:
+    print("Error: 'mcp.server.fastmcp' module not found. Ensure the 'mcp' package is installed or available.", file=sys.stderr)
+    sys.exit(1)
 
 # Add startup message
 print("Starting Azure AI Search MCP Server...", file=sys.stderr)
